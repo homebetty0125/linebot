@@ -1,77 +1,47 @@
 const linebot = require('@line/bot-sdk');
 const express = require('express');
-const bot = express();
+const app = express();
 
 // Line Channel資訊
-const config = {
+const bot = linebot({
+    channelId: 1552161500,
     channelSecret: '5f4e117a76c9d6515203a4d837168885',
     channelAccessToken: 'IukFQyWUmQz4ZKE9ij48Q6bzhDYIQbfPzZ0ZBU6Tmr8XK+4eRC6CN6YatVmDJSJ+dT696SH7LwI7V+oDPQFvUUzR+3MoAHdq53WSsZZameVwM/TcSnxLIyhyBxDDgT50zvHswT83QV1xLWClRqXHcAdB04t89/1O/w1cDnyilFU='
-};
+});
 
-const client = new linebot.Client(config);
+bot.on('message', function (e) {
 
-bot.post('/linewebhook', linebot.middleware(config), (req, res) => {
+    const replyMesg = `Hi~ 你剛才說的是:${e.message.text}`;
 
-    console.log(req, res);
+    console.log('replyMesg:', replyMesg)
 
-    Promise
-        .all(req.body.events.map(handleEvent))
-        .then((result) => res.json(result))
-        .catch((err) => {
+    // e.message.text是使用者傳給bot的訊息
+    e.reply(replyMesg)
+        .then(function (data) {
 
-            console.error(err);
-            res.status(500).end();
+            // 當訊息成功回傳後的處理
+            console.log('data:', data);
+
+        })
+        .catch(function (error) {
+
+            // 當訊息回傳失敗後的處理
+            console.log('error:', error);
 
         });
 
 });
 
-// Event
-function handleEvent (event) {
+const linebotParser = bot.parser();
+app.post('/linewebhook', linebotParser);
 
-    if (event.type !== 'message' || event.message.type !== 'text') {
+// Bot所監聽的webhook路徑與port
+app.listen(3005, function () {
 
-        // ignore non-text-message event
-        return Promise.resolve(null);
+    const port = server.address().port;
+    console.log('port:', port);
 
-    }
-
-    // create a echoing text message
-    const echo = {
-        type: 'text',
-        text: event.message.text
-    };
-
-    // use reply API
-    return client.replyMessage(event.replyToken, echo);
-
-}
-
-// bot.on('message', function (e) {
-
-//     const replyMesg = `Hi~ 你剛才說的是:${e.message.text}`;
-
-//     console.log('replyMesg:', replyMesg)
-
-//     // e.message.text是使用者傳給bot的訊息
-//     e.reply(replyMesg)
-//         .then(function (data) {
-
-//             // 當訊息成功回傳後的處理
-//             console.log('data:', data);
-
-//         })
-//         .catch(function (error) {
-
-//             // 當訊息回傳失敗後的處理
-//             console.log('error:', error);
-
-//         });
-
-// });
-
-// // Bot所監聽的webhook路徑與port
-// bot.listen('/linewebhook', 3005);
+});
 
 /**
  * Reference
