@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "PORT=3005 && nodemon start",
+    "start": "set PORT=3005 && nodemon start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "linebot": "^1.6.1",
+    "@line/bot-sdk": "^7.3.0",
+    "express": "^4.17.1",
     "nodemon": "^2.0.7"
   }
 }
