@@ -1,4 +1,4 @@
-const linebot = require('@line/bot-sdk');
+const linebot = require('linebot');
 const express = require('express');
 const app = express();
 
@@ -36,12 +36,7 @@ const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 
 // Bot所監聽的webhook路徑與port
-app.listen(3005, function () {
-
-    const port = server.address().port;
-    console.log('port:', port);
-
-});
+app.listen(3005);
 
 /**
  * Reference
