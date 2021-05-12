@@ -36,7 +36,7 @@ const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 
 // Bot 所監聽的 webhook 路徑與 port
-app.listen(3005);
+app.listen('/linewebhook', 3000);
 
 /**
  * Reference
