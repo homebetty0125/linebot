@@ -2,7 +2,7 @@ const linebot = require('linebot');
 const express = require('express');
 const app = express();
 
-// Line Channel資訊
+// Line Channel 資訊
 const bot = linebot({
     channelId: 1552161500,
     channelSecret: '5f4e117a76c9d6515203a4d837168885',
@@ -35,7 +35,7 @@ bot.on('message', function (e) {
 const linebotParser = bot.parser();
 app.post('/linewebhook', linebotParser);
 
-// Bot所監聽的webhook路徑與port
+// Bot 所監聽的 webhook 路徑與 port
 app.listen(3005);
 
 /**

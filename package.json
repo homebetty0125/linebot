@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "set PORT=3005 && nodemon start",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "dependencies": {
     "@line/bot-sdk": "^7.3.0",
@@ -18,6 +17,7 @@
     "heroku"
   ],
   "engines": {
-    "node": "14.x"
+    "node": "14.x",
+    "yarn": "1.x"
   }
 }
