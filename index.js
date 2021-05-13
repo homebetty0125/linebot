@@ -1,9 +1,31 @@
-const linebot = require('linebot');
 const express = require('express');
 const webhookRouter = require('./routes/webhook');
 const app = express();
 
+const port = process.env.PORT || 3005;
+
 app.use('/webhook', webhookRouter);
+
+// app.get('/', (reqData, resData) => {
+
+//     // 文字
+//     // resData.send(`<hi>Hiiiii</hi>`);
+
+//     // JSON
+//     resData.json({
+//         id: 1,
+//         name: 'Betty',
+//     });
+
+// });
+
+// console.log('port:', process.env.PORT);
+
+app.listen(port, () => {
+
+    console.log(`Express is running on http://localhost:${port}`);
+
+});
 
 
 /**
