@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const router = express();
 const linebot = require('linebot');
+const getBusRout = require('../messages/getBusRout');
 
 const bot = linebot({
     channelId: 1552161500,
@@ -8,28 +9,28 @@ const bot = linebot({
     channelAccessToken: 'IukFQyWUmQz4ZKE9ij48Q6bzhDYIQbfPzZ0ZBU6Tmr8XK+4eRC6CN6YatVmDJSJ+dT696SH7LwI7V+oDPQFvUUzR+3MoAHdq53WSsZZameVwM/TcSnxLIyhyBxDDgT50zvHswT83QV1xLWClRqXHcAdB04t89/1O/w1cDnyilFU='
 });
 
+getBusRout(bot);
+
 bot.on('message', (event) => {
 
-    console.log('event:', event);
+    // console.log('event:', event);
 
     const mesg = `Hi~ 你剛才說的是:${event.message.text}`;
 
-    // console.log('mesg:', mesg)
-
     // event.message.text是使用者傳給bot的訊息
-    // event.reply(mesg)
-    //     .then((data) => {
+    event.reply(mesg)
+        .then((data) => {
 
-    //         // 當訊息成功回傳後的處理
-    //         console.log('data:', data);
+            // 當訊息成功回傳後的處理
+            console.log('data:', data);
 
-    //     })
-    //     .catch((error) => {
+        })
+        .catch((error) => {
 
-    //         // 當訊息回傳失敗後的處理
-    //         console.log('error:', error);
+            // 當訊息回傳失敗後的處理
+            console.log('error:', error);
 
-    //     });
+        });
 
 });
 
